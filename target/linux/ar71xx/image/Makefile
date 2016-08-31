@@ -131,7 +131,7 @@ TARGET_DEVICES += bsb
 define Device/carambola2
   BOARDNAME = CARAMBOLA2
   IMAGE_SIZE = 16000k
-  CONSOLE = ttyATH0,115200
+  CONSOLE = null,115200
   MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
 endef
 TARGET_DEVICES += carambola2
