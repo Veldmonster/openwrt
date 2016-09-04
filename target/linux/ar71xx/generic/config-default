@@ -1,1 +1,1 @@
-CONFIG_CMDLINE="rootfstype=squashfs,jffs2 noinitrd"
+CONFIG_CMDLINE="rootfstype=squashfs,jffs2 noinitrd console=null"
