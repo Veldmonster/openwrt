@@ -6,7 +6,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://download.redis.io/releases/
-PKG_MD5SUM:=92d6d93ef2efc91e595c8bf578bf72baff397507
+PKG_MD5SUM:=138209b54dfc9819e6aea7b9503f8bd3
 
 PKG_INSTALL:=1
 
