@@ -109,6 +109,10 @@ static struct ar8327_pad_cfg dlan_pro_1200_ac_ar8327_pad0_cfg = {
 	.rxclk_delay_en = false,
 	.txclk_delay_sel = AR8327_CLK_DELAY_SEL1,
 	.rxclk_delay_sel = AR8327_CLK_DELAY_SEL0,
+<<<<<<< HEAD
+=======
+	.mac06_exchange_dis = true,
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 };
 
 static struct ar8327_pad_cfg dlan_pro_1200_ac_ar8327_pad5_cfg = {

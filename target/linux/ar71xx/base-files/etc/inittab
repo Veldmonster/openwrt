@@ -1,3 +1,7 @@
 ::sysinit:/etc/init.d/rcS S boot
 ::shutdown:/etc/init.d/rcS K shutdown
+<<<<<<< HEAD
 #::askconsole:/bin/ash --login
+=======
+::askconsole:/usr/libexec/login.sh
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

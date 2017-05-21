@@ -8,7 +8,11 @@
  
  #include "rt2x00.h"
  #include "rt2800lib.h"
+<<<<<<< HEAD
 @@ -8482,13 +8483,14 @@ static int rt2800_probe_rt(struct rt2x00
+=======
+@@ -8486,13 +8487,14 @@ static int rt2800_probe_rt(struct rt2x00
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  
  int rt2800_probe_clk(struct rt2x00_dev *rt2x00dev)
  {

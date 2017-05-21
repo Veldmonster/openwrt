@@ -43,8 +43,22 @@ endef
 $(eval $(call BuildPackage,rtl8192de-firmware))
 
 Package/rtl8192se-firmware = $(call Package/firmware-default,RealTek RTL8192SE firmware)
+<<<<<<< HEAD
 define KernelPackage/rtl8192se/install
+=======
+define Package/rtl8192se-firmware/install
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192sefw.bin $(1)/lib/firmware/rtlwifi
 endef
 $(eval $(call BuildPackage,rtl8192se-firmware))
+<<<<<<< HEAD
+=======
+
+Package/rtl8192su-firmware = $(call Package/firmware-default,RealTek RTL8192SU firmware)
+define Package/rtl8192su-firmware/install
+	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8712u.bin $(1)/lib/firmware/rtlwifi
+endef
+$(eval $(call BuildPackage,rtl8192su-firmware))
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

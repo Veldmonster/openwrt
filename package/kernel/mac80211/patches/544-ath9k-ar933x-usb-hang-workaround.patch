@@ -40,7 +40,11 @@
  	return true;
  }
  
+<<<<<<< HEAD
 @@ -1797,8 +1816,14 @@ static int ath9k_hw_do_fastcc(struct ath
+=======
+@@ -1799,8 +1818,14 @@ static int ath9k_hw_do_fastcc(struct ath
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	if (AR_SREV_9271(ah))
  		ar9002_hw_load_ani_reg(ah, chan);
  
@@ -55,7 +59,11 @@
  	return -EINVAL;
  }
  
+<<<<<<< HEAD
 @@ -2052,6 +2077,9 @@ int ath9k_hw_reset(struct ath_hw *ah, st
+=======
+@@ -2054,6 +2079,9 @@ int ath9k_hw_reset(struct ath_hw *ah, st
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  		ath9k_hw_set_radar_params(ah);
  	}
  

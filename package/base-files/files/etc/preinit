@@ -1,10 +1,14 @@
 #!/bin/sh
-# Copyright (C) 2006 OpenWrt.org
+# Copyright (C) 2006-2016 OpenWrt.org
 # Copyright (C) 2010 Vertical Communications
 
 [ -z "$PREINIT" ] && exec /sbin/init
 
+<<<<<<< HEAD
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+=======
+export PATH="%PATH%"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 pi_ifname=
 pi_ip=192.168.1.1
@@ -20,7 +24,11 @@ fs_failsafe_wait_timeout=2
 
 pi_suppress_stderr="y"
 pi_init_suppress_stderr="y"
+<<<<<<< HEAD
 pi_init_path="/usr/sbin:/usr/bin:/sbin:/bin"
+=======
+pi_init_path="%PATH%"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 pi_init_cmd="/sbin/init"
 
 . /lib/functions.sh

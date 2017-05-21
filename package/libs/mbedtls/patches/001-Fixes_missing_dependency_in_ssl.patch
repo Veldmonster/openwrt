@@ -19,4 +19,7 @@ Fixes #522 - 'mbedtls_time_t does not name a type in ssl.h'
  #endif
  
  /*
+<<<<<<< HEAD
 
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

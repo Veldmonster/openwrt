@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+mtd: spi-nor: support for (GigaDevice) GD25Q128B
+
+Signed-off-by: Rafał Miłecki <zajec5@gmail.com>
+Signed-off-by: Brian Norris <computersforpeace@gmail.com>
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 --- a/drivers/mtd/spi-nor/spi-nor.c
 +++ b/drivers/mtd/spi-nor/spi-nor.c
 @@ -510,6 +510,7 @@ static const struct spi_device_id spi_no

@@ -1,6 +1,10 @@
 --- a/drivers/net/wireless/marvell/libertas/cfg.c
 +++ b/drivers/net/wireless/marvell/libertas/cfg.c
+<<<<<<< HEAD
 @@ -2174,6 +2174,8 @@ int lbs_cfg_register(struct lbs_private
+=======
+@@ -2212,6 +2212,8 @@ int lbs_cfg_register(struct lbs_private
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	wdev->wiphy->n_cipher_suites = ARRAY_SIZE(cipher_suites);
  	wdev->wiphy->reg_notifier = lbs_reg_notifier;
  

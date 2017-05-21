@@ -10,7 +10,11 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
 
 --- a/drivers/net/wireless/ralink/rt2x00/rt2800lib.c
 +++ b/drivers/net/wireless/ralink/rt2x00/rt2800lib.c
+<<<<<<< HEAD
 @@ -7852,7 +7852,10 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+=======
+@@ -7856,7 +7856,10 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	if (rt2x00_rt(rt2x00dev, RT3593))
  		__set_bit(RT2800_HAS_HIGH_SHARED_MEM, &drv_data->rt2800_flags);
  

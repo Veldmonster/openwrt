@@ -1,11 +1,30 @@
 #!/bin/sh
 
-[ "${ACTION}" = "released" ] || exit 0
-
 . /lib/functions.sh
 
-logger "$BUTTON pressed for $SEEN seconds"
+case "$ACTION" in
+pressed)
+	return 5
+;;
+timeout)
+	. /etc/diag.sh
+	set_state failsafe
+;;
+released)
+	if [ "$SEEN" -lt 1 ]
+	then
+		echo "REBOOT" > /dev/console
+		sync
+		reboot
+	elif [ "$SEEN" -gt 5 ]
+	then
+		echo "FACTORY RESET" > /dev/console
+		jffs2reset -y && reboot &
+	fi
+;;
+esac
 
+<<<<<<< HEAD
 if [ "$SEEN" -lt 1 ]
 then
 	echo "REBOOT" > /dev/console
@@ -17,4 +36,6 @@ then
 	jffs2reset -y && reboot &
 fi
 
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 return 0

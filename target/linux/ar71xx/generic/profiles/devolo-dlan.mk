@@ -5,6 +5,22 @@
 # See /LICENSE for more information.
 #
 
+<<<<<<< HEAD
+=======
+define Profile/dLAN_Hotspot
+	NAME:=devolo dLAN Hotspot
+	PACKAGES:=open-plc-utils open-plc-utils-chkpib open-plc-utils-getpib open-plc-utils-modpib \
+		open-plc-utils-setpib open-plc-utils-hpavkey open-plc-utils-plchost \
+		open-plc-utils-plctool open-plc-utils-pibdump open-plc-utils-plcstat \
+		ebtables hostapd-utils wifitoggle wpad
+endef
+
+define Profile/dLAN_Hotspot/Description
+	Package set optimized for the devolo dLAN Hotspot.
+endef
+$(eval $(call Profile,dLAN_Hotspot))
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 define Profile/dLAN_pro_500_wp
 	NAME:=devolo dLAN pro 500 Wireless+
 	PACKAGES:=open-plc-utils open-plc-utils-chkpib open-plc-utils-getpib open-plc-utils-modpib \

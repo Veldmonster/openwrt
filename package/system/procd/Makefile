@@ -8,14 +8,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=procd
+<<<<<<< HEAD
 PKG_VERSION:=2015-10-29.1
+=======
+PKG_VERSION:=2016-07-29
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://nbd.name/luci2/procd.git
+PKG_SOURCE_URL=$(OPENWRT_GIT)/project/procd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+<<<<<<< HEAD
 PKG_SOURCE_VERSION:=d5fddd91b966424bb63e943e789704d52382cc18
+=======
+PKG_SOURCE_VERSION:=2c9f5d4af1559b840c42f1443ede9f9fe809c58b
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 CMAKE_INSTALL:=1
 
@@ -24,12 +32,23 @@ PKG_LICENSE_FILES:=
 
 PKG_MAINTAINER:=John Crispin <blogic@openwrt.org>
 
+<<<<<<< HEAD
 PKG_CONFIG_DEPENDS:= CONFIG_KERNEL_SECCOMP CONFIG_NAND_SUPPORT CONFIG_PROCD_SHOW_BOOT CONFIG_PROCD_ZRAM_TMPFS \
+=======
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_TARGET_INIT_PATH CONFIG_KERNEL_SECCOMP \
+	CONFIG_NAND_SUPPORT CONFIG_PROCD_SHOW_BOOT CONFIG_PROCD_ZRAM_TMPFS \
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	CONFIG_KERNEL_NAMESPACES CONFIG_PACKAGE_procd-ujail CONFIG_PACKAGE_procd-seccomp
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
+ifeq ($(DUMP),)
+  STAMP_CONFIGURED:=$(strip $(STAMP_CONFIGURED))_$(shell $(SH_FUNC) echo $(CONFIG_TARGET_INIT_PATH) | md5s)
+endif
+
+CMAKE_OPTIONS += -DEARLY_PATH="$(TARGET_INIT_PATH)"
 TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lrt)
 
 define Package/procd
@@ -40,6 +59,7 @@ define Package/procd
 endef
 
 define Package/procd-ujail
+<<<<<<< HEAD
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=@KERNEL_NAMESPACES +@KERNEL_UTS_NS +@KERNEL_IPC_NS +@KERNEL_PID_NS +libubox +libblobmsg-json
@@ -49,6 +69,17 @@ endef
 define Package/procd-seccomp
   SECTION:=base
   CATEGORY:=Base system
+=======
+  SECTION:=base
+  CATEGORY:=Base system
+  DEPENDS:=@KERNEL_NAMESPACES +@KERNEL_UTS_NS +@KERNEL_IPC_NS +@KERNEL_PID_NS +libubox +libblobmsg-json
+  TITLE:=OpenWrt process jail helper
+endef
+
+define Package/procd-seccomp
+  SECTION:=base
+  CATEGORY:=Base system
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
   DEPENDS:=@arm||@armeb||@mips||@mipsel||@i386||@x86_64 @!TARGET_uml @KERNEL_SECCOMP +libubox +libblobmsg-json
   TITLE:=OpenWrt process seccomp helper + utrace
 endef

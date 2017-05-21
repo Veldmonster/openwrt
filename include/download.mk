@@ -7,13 +7,22 @@
 
 OPENWRT_GIT = http://git.openwrt.org
 
+<<<<<<< HEAD
+=======
+ifdef PKG_SOURCE_VERSION
+PKG_VERSION ?= $(if $(PKG_SOURCE_DATE),$(PKG_SOURCE_DATE)-)$(call version_abbrev,$(PKG_SOURCE_VERSION))
+PKG_SOURCE_SUBDIR ?= $(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE ?= $(PKG_SOURCE_SUBDIR).tar.xz
+endif
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 DOWNLOAD_RDEP=$(STAMP_PREPARED) $(HOST_STAMP_PREPARED)
 
 # Try to guess the download method from the URL
 define dl_method
 $(strip \
   $(if $(2),$(2), \
-    $(if $(filter @GNOME/% @GNU/% @KERNEL/% @SF/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
+    $(if $(filter @APACHE/% @GITHUB/% @GNOME/% @GNU/% @KERNEL/% @SF/% @SAVANNAH/% ftp://% http://% https://% file://%,$(1)),default, \
       $(if $(filter git://%,$(1)),git, \
         $(if $(filter svn://%,$(1)),svn, \
           $(if $(filter cvs://%,$(1)),cvs, \
@@ -44,11 +53,19 @@ define DownloadMethod/unknown
 endef
 
 define DownloadMethod/default
+<<<<<<< HEAD
 	$(SCRIPT_DIR)/download.pl "$(DL_DIR)" "$(FILE)" "$(MD5SUM)" "$(URL_FILE)" $(foreach url,$(URL),"$(url)")
 endef
 
 define wrap_mirror
 	$(if $(if $(MIRROR),$(filter-out x,$(MIRROR_MD5SUM))),@$(SCRIPT_DIR)/download.pl "$(DL_DIR)" "$(FILE)" "$(MIRROR_MD5SUM)" "" || ( $(1) ),$(1))
+=======
+	$(SCRIPT_DIR)/download.pl "$(DL_DIR)" "$(FILE)" "$(HASH)" "$(URL_FILE)" $(foreach url,$(URL),"$(url)")
+endef
+
+define wrap_mirror
+$(if $(if $(MIRROR),$(filter-out x,$(MIRROR_HASH))),$(SCRIPT_DIR)/download.pl "$(DL_DIR)" "$(FILE)" "$(MIRROR_HASH)" "" || ( $(1) ),$(1))
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 endef
 
 define DownloadMethod/cvs
@@ -90,8 +107,9 @@ define DownloadMethod/git
 		cd $(TMP_DIR)/dl && \
 		rm -rf $(SUBDIR) && \
 		[ \! -d $(SUBDIR) ] && \
-		git clone $(URL) $(SUBDIR) --recursive && \
-		(cd $(SUBDIR) && git checkout $(VERSION) && git submodule update) && \
+		git clone $(URL) $(SUBDIR) && \
+		(cd $(SUBDIR) && git checkout $(VERSION) && \
+		git submodule update --init --recursive) && \
 		echo "Packing checkout..." && \
 		rm -rf $(SUBDIR)/.git && \
 		$(call dl_pack,$(TMP_DIR)/dl/$(FILE),$(SUBDIR)) && \
@@ -159,11 +177,26 @@ define Download/Defaults
   FILE:=
   URL_FILE:=
   PROTO:=
-  MD5SUM:=
+  HASH=$$(MD5SUM)
+  MD5SUM:=x
   SUBDIR:=
   MIRROR:=1
+  MIRROR_HASH=$$(MIRROR_MD5SUM)
   MIRROR_MD5SUM:=x
   VERSION:=
+endef
+
+define Download/default
+  FILE:=$(PKG_SOURCE)
+  URL:=$(PKG_SOURCE_URL)
+  SUBDIR:=$(PKG_SOURCE_SUBDIR)
+  PROTO:=$(PKG_SOURCE_PROTO)
+  $(if $(PKG_SOURCE_MIRROR),MIRROR:=$(filter 1,$(PKG_MIRROR)))
+  $(if $(PKG_MIRROR_MD5SUM),MIRROR_MD5SUM:=$(PKG_MIRROR_MD5SUM))
+  $(if $(PKG_MIRROR_HASH),MIRROR_HASH:=$(PKG_MIRROR_HASH))
+  VERSION:=$(PKG_SOURCE_VERSION)
+  $(if $(PKG_MD5SUM),MD5SUM:=$(PKG_MD5SUM))
+  $(if $(PKG_HASH),HASH:=$(PKG_HASH))
 endef
 
 define Download
@@ -182,6 +215,6 @@ define Download
 
   $(DL_DIR)/$(FILE):
 	mkdir -p $(DL_DIR)
-	$(if $(DownloadMethod/$(call dl_method,$(URL),$(PROTO))),$(DownloadMethod/$(call dl_method,$(URL),$(PROTO))),$(DownloadMethod/unknown))
+	$(call locked,$(if $(DownloadMethod/$(call dl_method,$(URL),$(PROTO))),$(DownloadMethod/$(call dl_method,$(URL),$(PROTO))),$(DownloadMethod/unknown)),$(FILE))
 
 endef

@@ -93,11 +93,19 @@ HOST_MAKE_FLAGS+= \
 	all
 
 HOST_CONFIGURE_ARGS+= \
+<<<<<<< HEAD
 	--prefix=$(STAGING_DIR_HOST)
 
 define Host/Install
 	$(INSTALL_DIR) $(STAGING_DIR_HOST)/bin/
 	$(MAKE) -C $(HOST_BUILD_DIR) PREFIX=$(STAGING_DIR_HOST)/usr/ install
+=======
+	--prefix=$(STAGING_DIR)/host
+
+define Host/Install
+	$(INSTALL_DIR) $(STAGING_DIR)/host/bin/
+	$(MAKE) -C $(HOST_BUILD_DIR) PREFIX=$(STAGING_DIR)/host/ install
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 endef
 
 $(eval $(call HostBuild))

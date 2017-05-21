@@ -14,10 +14,14 @@ PKG_VERSION:=$(PKG_BASE)$(PKG_BUGFIX)
 PKG_RELEASE:=1
 PKG_USE_MIPS16:=0
 
-PKG_BUILD_PARALLEL:=1
+PKG_BUILD_PARALLEL:=0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://www.openssl.org/source/ \
+<<<<<<< HEAD
+=======
+	ftp://ftp.openssl.org/source/ \
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	http://www.openssl.org/source/old/$(PKG_BASE)/ \
 	ftp://ftp.funet.fi/pub/crypt/mirrors/ftp.openssl.org/source \
 	ftp://ftp.sunet.se/pub/security/tools/net/openssl/source/
@@ -25,13 +29,13 @@ PKG_MD5SUM:=96322138f0b69e61b7212bc53d5e912b
 
 PKG_LICENSE:=OpenSSL
 PKG_LICENSE_FILES:=LICENSE
-PKG_BUILD_DEPENDS:=ocf-crypto-headers
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_ENGINE_CRYPTO \
 	CONFIG_OPENSSL_ENGINE_DIGEST \
 	CONFIG_OPENSSL_WITH_EC \
 	CONFIG_OPENSSL_WITH_EC2M \
-	CONFIG_OPENSSL_WITH_SSL3
+	CONFIG_OPENSSL_WITH_SSL3 \
+	CONFIG_OPENSSL_HARDWARE_SUPPORT
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -91,7 +95,7 @@ endef
 
 
 OPENSSL_NO_CIPHERS:= no-idea no-md2 no-mdc2 no-rc5 no-sha0 no-camellia no-krb5
-OPENSSL_OPTIONS:= shared no-err no-hw zlib-dynamic no-sse2 no-ssl2
+OPENSSL_OPTIONS:= shared no-err zlib-dynamic no-sse2 no-ssl2
 
 ifdef CONFIG_OPENSSL_ENGINE_CRYPTO
   OPENSSL_OPTIONS += -DHAVE_CRYPTODEV
@@ -112,6 +116,10 @@ endif
 
 ifndef CONFIG_OPENSSL_WITH_SSL3
   OPENSSL_OPTIONS += no-ssl3
+endif
+
+ifndef CONFIG_OPENSSL_HARDWARE_SUPPORT
+  OPENSSL_OPTIONS += no-hw
 endif
 
 ifeq ($(CONFIG_x86_64),y)
@@ -156,7 +164,7 @@ define Build/Configure
 		depend
 endef
 
-TARGET_CFLAGS += $(FPIC)
+TARGET_CFLAGS += $(FPIC) -I$(CURDIR)/include
 
 define Build/Compile
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \

@@ -1,13 +1,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ubox
+<<<<<<< HEAD
 PKG_VERSION:=2015-11-22
+=======
+PKG_VERSION:=2016-07-19
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://nbd.name/luci2/ubox.git
+PKG_SOURCE_URL=$(OPENWRT_GIT)/project/ubox.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+<<<<<<< HEAD
 PKG_SOURCE_VERSION:=c086167a0154745c677f8730a336ea9cf7d71031
+=======
+PKG_SOURCE_VERSION:=aead2c0cbffdda9b46d74a998a4c6aeef423b21a
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 CMAKE_INSTALL:=1
 
@@ -37,8 +45,15 @@ endef
 
 define Package/ubox/install
 	$(INSTALL_DIR) $(1)/sbin $(1)/usr/sbin $(1)/lib/
+<<<<<<< HEAD
 
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{kmodloader,validate_data} $(1)/sbin/
+=======
+	$(INSTALL_DIR) $(1)/sbin $(1)/usr/sbin $(1)/lib/ $(1)/usr/bin
+
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{kmodloader,validate_data} $(1)/sbin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/getrandom $(1)/usr/bin/
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libvalidate.so $(1)/lib
 
 	$(LN) ../../sbin/kmodloader $(1)/usr/sbin/rmmod

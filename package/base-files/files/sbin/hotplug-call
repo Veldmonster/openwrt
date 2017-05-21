@@ -1,11 +1,15 @@
 #!/bin/sh
-# Copyright (C) 2006-2010 OpenWrt.org
+# Copyright (C) 2006-2016 OpenWrt.org
 
 export HOTPLUG_TYPE="$1"
 
 . /lib/functions.sh
 
+<<<<<<< HEAD
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
+=======
+PATH="%PATH%"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 LOGNAME=root
 USER=root
 export PATH LOGNAME USER

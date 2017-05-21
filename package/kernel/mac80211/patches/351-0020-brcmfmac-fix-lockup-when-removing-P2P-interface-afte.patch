@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 From b50ddfa8530e9b5f52e873fdd6ff04f327a88799 Mon Sep 17 00:00:00 2001
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
 Date: Fri, 17 Jun 2016 12:29:21 +0200
 Subject: [PATCH] brcmfmac: fix lockup when removing P2P interface after event
@@ -18,6 +21,7 @@ assumes rtnl to be unlocked.
 Fix it by adding an extra rtnl_locked parameter to functions and calling
 unregister_netdevice when needed.
 
+<<<<<<< HEAD
 Signed-off-by: RafaÅ MiÅecki <zajec5@gmail.com>
 Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
 ---
@@ -26,6 +30,11 @@ Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
  .../wireless/broadcom/brcm80211/brcmfmac/fweh.c    |  2 +-
  .../net/wireless/broadcom/brcm80211/brcmfmac/p2p.c |  4 +--
  4 files changed, 21 insertions(+), 16 deletions(-)
+=======
+Signed-off-by: Rafał Miłecki <zajec5@gmail.com>
+Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
+---
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/core.c

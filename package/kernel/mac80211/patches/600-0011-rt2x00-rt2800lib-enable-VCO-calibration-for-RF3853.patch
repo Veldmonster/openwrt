@@ -18,7 +18,11 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
  	case RF5360:
  	case RF5362:
  	case RF5370:
+<<<<<<< HEAD
 @@ -7848,6 +7849,7 @@ static int rt2800_probe_hw_mode(struct r
+=======
+@@ -7852,6 +7853,7 @@ static int rt2800_probe_hw_mode(struct r
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	case RF3053:
  	case RF3070:
  	case RF3290:

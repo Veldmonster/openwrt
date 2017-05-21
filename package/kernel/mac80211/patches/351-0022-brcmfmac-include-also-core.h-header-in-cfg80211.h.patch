@@ -8,16 +8,28 @@ Content-Transfer-Encoding: 8bit
 This header provides two inline functions using struct brcmf_if so we
 need core.h to avoid:
 
+<<<<<<< HEAD
 drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h: In function ândev_to_profâ:
 drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h:368:13: error: dereferencing pointer to incomplete type
   return &ifp->vif->profile;
              ^
 drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h: In function ândev_to_vifâ:
+=======
+drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h: In function ‘ndev_to_prof’:
+drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h:368:13: error: dereferencing pointer to incomplete type
+  return &ifp->vif->profile;
+             ^
+drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h: In function ‘ndev_to_vif’:
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.h:374:12: error: dereferencing pointer to incomplete type
   return ifp->vif;
             ^
 
+<<<<<<< HEAD
 Signed-off-by: RafaÅ MiÅecki <zajec5@gmail.com>
+=======
+Signed-off-by: Rafał Miłecki <zajec5@gmail.com>
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
 ---
 

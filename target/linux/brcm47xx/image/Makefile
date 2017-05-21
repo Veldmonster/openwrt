@@ -50,6 +50,7 @@ endef
 
 define Build/trx-with-loader
 	$(STAGING_DIR_HOST)/bin/trx \
+		-m 33554432 \
 		-o $@ \
 		-f $(KDIR)/loader.gz \
 		-f $(word 1,$^) \
@@ -94,6 +95,18 @@ endef
 
 define Build/linksys-bin
 	$(STAGING_DIR_HOST)/bin/addpattern -4 -p $(DEVICE_ID) -v v$(VERSION) $(if $(SERIAL),-s $(SERIAL)) -i $@ -o $@.new
+<<<<<<< HEAD
+	mv $@.new $@
+endef
+
+define Build/linksys-pattern-partition
+	$(STAGING_DIR_HOST)/bin/addpattern -5 -p $(DEVICE_ID) -v v$(VERSION) $(if $(SERIAL),-s $(SERIAL)) -i /dev/null -o $@
+endef
+
+define Build/motorola-bin
+	$(STAGING_DIR_HOST)/bin/motorola-bin -$(MOTOROLA_DEVICE) $@ $@.new
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	mv $@.new $@
 endef
 
@@ -106,12 +119,18 @@ define Build/motorola-bin
 	mv $@.new $@
 endef
 
-define Build/netgear-chk
-	$(STAGING_DIR_HOST)/bin/mkchkimg \
-		-o $@.new \
-		-k $@ \
-		-b $(BOARD_ID) \
-		-r $(REGION)
+define Build/prepend-with-elf
+	mv $@ $@.old
+	dd if=$(KDIR)/loader.elf of=$@ bs=131072 conv=sync
+	cat $@.old >> $@
+endef
+
+define Build/tailed-bin
+	echo $(BIN_TAIL) >> $@
+endef
+
+define Build/usrobotics-bin
+	$(STAGING_DIR_HOST)/bin/trx2usr $@ $@.new
 	mv $@.new $@
 endef
 
@@ -136,7 +155,11 @@ endef
 
 DEVICE_VARS += PRODUCTID
 DEVICE_VARS += DEVICE_ID VERSION SERIAL
+<<<<<<< HEAD
 DEVICE_VARS += BOARD_ID REGION
+=======
+DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_REGION
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 DEVICE_VARS += MOTOROLA_DEVICE
 DEVICE_VARS += BIN_TAIL
 
@@ -210,8 +233,8 @@ endef
 define NetgearDevice
   define Device/netgear-$(1)
 	$$(Device/netgear)
-	BOARD_ID := $(2)
-	REGION := $(3)
+	NETGEAR_BOARD_ID := $(2)
+	NETGEAR_REGION := $(3)
   endef
   TARGET_DEVICES += netgear-$(1)
 endef
@@ -368,6 +391,7 @@ ifeq ($(SUBTARGET),mips74k)
   $(eval $(call LinksysDevice,e4200-v1,4200,1.0.5))
   $(eval $(call NetgearDevice,wgr614-v10_north-america,U12H139T01_NETGEAR,2))
   $(eval $(call NetgearDevice,wgr614-v10_other-regions,U12H139T01_NETGEAR,1))
+  $(eval $(call NetgearDevice,wn2500rp-v1,U12H197T00_NETGEAR,1))
   $(eval $(call NetgearDevice,wndr3400-v1,U12H155T00_NETGEAR,2))
   $(eval $(call NetgearDevice,wndr3400-v2,U12H187T00_NETGEAR,2))
   $(eval $(call NetgearDevice,wndr3400-v3,U12H208T00_NETGEAR,1))
@@ -392,8 +416,15 @@ endif
 #################################################
 
 define Image/Build/Initramfs
-	$(STAGING_DIR_HOST)/bin/trx -o $(BIN_DIR)/$(IMG_PREFIX)-initramfs.trx -f $(KDIR)/loader.gz -f $(KDIR)/vmlinux-initramfs.lzma
-	$(STAGING_DIR_HOST)/bin/trx -o $(BIN_DIR)/$(IMG_PREFIX)-initramfs-noloader-nodictionary.trx -f $(KDIR)/vmlinux-initramfs-nodictionary.lzma
+	$(STAGING_DIR_HOST)/bin/trx \
+		-m 33554432 \
+		-o $(BIN_DIR)/$(IMG_PREFIX)-initramfs.trx \
+		-f $(KDIR)/loader.gz \
+		-f $(KDIR)/vmlinux-initramfs.lzma
+	$(STAGING_DIR_HOST)/bin/trx \
+		-m 33554432 \
+		-o $(BIN_DIR)/$(IMG_PREFIX)-initramfs-noloader-nodictionary.trx \
+		-f $(KDIR)/vmlinux-initramfs-nodictionary.lzma
 endef
 
 # $(1): filesystem type.

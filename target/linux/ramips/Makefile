@@ -10,10 +10,14 @@ ARCH:=mipsel
 BOARD:=ramips
 BOARDNAME:=Ralink RT288x/RT3xxx
 SUBTARGETS:=rt305x mt7620 mt7621 mt7628 mt7688 rt3883 rt288x
+<<<<<<< HEAD
 FEATURES:=squashfs gpio
+=======
+FEATURES:=squashfs gpio mips16
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 MAINTAINER:=John Crispin <blogic@openwrt.org>
 
-KERNEL_PATCHVER:=3.18
+KERNEL_PATCHVER:=4.4
 
 include $(INCLUDE_DIR)/target.mk
 DEFAULT_PACKAGES += \

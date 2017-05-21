@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 From: Felix Fietkau <nbd@openwrt.org>
+=======
+From: Felix Fietkau <nbd@nbd.name>
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 Date: Sun, 7 Jun 2015 13:53:35 +0200
 Subject: [PATCH] ath9k: force rx_clear when disabling rx
 
@@ -6,7 +10,11 @@ This makes stopping Rx more reliable and should reduce the frequency of
 Rx related DMA stop warnings
 
 Cc: stable@vger.kernel.org
+<<<<<<< HEAD
 Signed-off-by: Felix Fietkau <nbd@openwrt.org>
+=======
+Signed-off-by: Felix Fietkau <nbd@nbd.name>
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 ---
 
 --- a/drivers/net/wireless/ath/ath9k/mac.c

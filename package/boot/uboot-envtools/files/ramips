@@ -19,12 +19,17 @@ all0256n | \
 all5002)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x10000" "0x10000"
 	;;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 linkits7688 | \
 linkits7688d | \
 wsr-600 | \
 wsr-1166 | \
-br6425)
+br6425 | \
+miwifi-nano | \
+sk-wb8)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x10000"
 	;;
 esac

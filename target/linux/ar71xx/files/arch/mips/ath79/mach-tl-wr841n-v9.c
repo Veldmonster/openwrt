@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  *  TP-LINK TL-WR841N/ND v9/v11
+=======
+ *  TP-LINK TL-WR841N/ND v9/v11 / TL-WR842N/ND v3
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  *
  *  Copyright (C) 2014 Matthias Schiffer <mschiffer@universe-factory.net>
  *  Copyright (C) 2016 Cezary Jackiewicz <cezary@eko.one.pl>
@@ -49,6 +53,23 @@
 #define TL_WR841NV11_GPIO_BTN_RESET	12
 #define TL_WR841NV11_GPIO_BTN_WIFI	17
 
+<<<<<<< HEAD
+=======
+#define TL_WR842NV3_GPIO_LED_SYSTEM	2
+#define TL_WR842NV3_GPIO_LED_WLAN	3
+#define TL_WR842NV3_GPIO_LED_WAN_RED	4
+#define TL_WR842NV3_GPIO_LED_WAN_GREEN	11
+#define TL_WR842NV3_GPIO_LED_LAN1	12
+#define TL_WR842NV3_GPIO_LED_LAN2	13
+#define TL_WR842NV3_GPIO_LED_LAN3	14
+#define TL_WR842NV3_GPIO_LED_LAN4	15
+#define TL_WR842NV3_GPIO_LED_3G		16
+#define TL_WR842NV3_GPIO_LED_WPS	17
+
+#define TL_WR842NV3_GPIO_BTN_RESET	1
+#define TL_WR842NV3_GPIO_BTN_WIFI	0
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 #define TL_WR841NV9_KEYS_POLL_INTERVAL	20	/* msecs */
 #define TL_WR841NV9_KEYS_DEBOUNCE_INTERVAL (3 * TL_WR841NV9_KEYS_POLL_INTERVAL)
 
@@ -150,6 +171,72 @@ static struct gpio_led tl_wr841n_v11_leds_gpio[] __initdata = {
 		.active_low	= 1,
 	},
 };
+<<<<<<< HEAD
+=======
+
+static struct gpio_led tl_wr842n_v3_leds_gpio[] __initdata = {
+	{
+		.name		= "tp-link:green:lan1",
+		.gpio		= TL_WR842NV3_GPIO_LED_LAN1,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:lan2",
+		.gpio		= TL_WR842NV3_GPIO_LED_LAN2,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:lan3",
+		.gpio		= TL_WR842NV3_GPIO_LED_LAN3,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:lan4",
+		.gpio		= TL_WR842NV3_GPIO_LED_LAN4,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:wan",
+		.gpio		= TL_WR842NV3_GPIO_LED_WAN_GREEN,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:red:wan",
+		.gpio		= TL_WR842NV3_GPIO_LED_WAN_RED,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:wlan",
+		.gpio		= TL_WR842NV3_GPIO_LED_WLAN,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:system",
+		.gpio		= TL_WR842NV3_GPIO_LED_SYSTEM,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:3g",
+		.gpio		= TL_WR842NV3_GPIO_LED_3G,
+		.active_low	= 1,
+	}, {
+		.name		= "tp-link:green:wps",
+		.gpio		= TL_WR842NV3_GPIO_LED_WPS,
+		.active_low	= 1,
+	},
+};
+
+static struct gpio_keys_button tl_wr842n_v3_gpio_keys[] __initdata = {
+	{
+		.desc		= "Reset button",
+		.type		= EV_KEY,
+		.code		= KEY_RESTART,
+		.debounce_interval = TL_WR841NV9_KEYS_DEBOUNCE_INTERVAL,
+		.gpio		= TL_WR842NV3_GPIO_BTN_RESET,
+		.active_low	= 1,
+	}, {
+		.desc		= "WIFI button",
+		.type		= EV_KEY,
+		.code		= KEY_RFKILL,
+		.debounce_interval = TL_WR841NV9_KEYS_DEBOUNCE_INTERVAL,
+		.gpio		= TL_WR842NV3_GPIO_BTN_WIFI,
+		.active_low	= 1,
+	}
+};
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 static void __init tl_ap143_setup(void)
 {
@@ -212,3 +299,23 @@ static void __init tl_wr841n_v11_setup(void)
 
 MIPS_MACHINE(ATH79_MACH_TL_WR841N_V11, "TL-WR841N-v11", "TP-LINK TL-WR841N/ND v11",
 	     tl_wr841n_v11_setup);
+<<<<<<< HEAD
+=======
+
+static void __init tl_wr842n_v3_setup(void)
+{
+	tl_ap143_setup();
+
+	ath79_register_leds_gpio(-1, ARRAY_SIZE(tl_wr842n_v3_leds_gpio),
+				 tl_wr842n_v3_leds_gpio);
+
+	ath79_register_gpio_keys_polled(1, TL_WR841NV9_KEYS_POLL_INTERVAL,
+					ARRAY_SIZE(tl_wr842n_v3_gpio_keys),
+					tl_wr842n_v3_gpio_keys);
+
+	ath79_register_usb();
+}
+
+MIPS_MACHINE(ATH79_MACH_TL_WR842N_V3, "TL-WR842N-v3", "TP-LINK TL-WR842N/ND v3",
+	     tl_wr842n_v3_setup);
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

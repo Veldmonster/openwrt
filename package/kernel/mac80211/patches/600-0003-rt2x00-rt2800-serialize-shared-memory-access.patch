@@ -239,7 +239,11 @@ Changes since v1: ---
  	msleep(1);
  
  	/*
+<<<<<<< HEAD
 @@ -7726,6 +7774,8 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+=======
+@@ -7730,6 +7778,8 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	int retval;
  	u32 reg;
  
@@ -248,7 +252,11 @@ Changes since v1: ---
  	retval = rt2800_probe_rt(rt2x00dev);
  	if (retval)
  		return retval;
+<<<<<<< HEAD
 @@ -7809,8 +7859,11 @@ void rt2800_get_key_seq(struct ieee80211
+=======
+@@ -7813,8 +7863,11 @@ void rt2800_get_key_seq(struct ieee80211
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  		return;
  
  	offset = MAC_IVEIV_ENTRY(key->hw_key_idx);

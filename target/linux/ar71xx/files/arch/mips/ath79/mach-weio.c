@@ -3,12 +3,21 @@
  *
  * Copyright (C) 2013 Drasko DRASKOVIC and Uros PETREVSKI
  *
+<<<<<<< HEAD
  *              ##      ## ######## ####  #######
  *              ##  ##  ## ##        ##  ##     ##
  *              ##  ##  ## ##        ##  ##     ##
  *              ##  ##  ## ######    ##  ##     ##
  *              ##  ##  ## ##        ##  ##     ##
  *              ##  ##  ## ##        ##  ##     ##
+=======
+ *              ##      ## ######## ####  #######  
+ *              ##  ##  ## ##        ##  ##     ## 
+ *              ##  ##  ## ##        ##  ##     ## 
+ *              ##  ##  ## ######    ##  ##     ## 
+ *              ##  ##  ## ##        ##  ##     ## 
+ *              ##  ##  ## ##        ##  ##     ## 
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  *               ###  ###  ######## ####  #######
  *
  *                   Web Of Things Platform
@@ -27,7 +36,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
+<<<<<<< HEAD
  * Authors :
+=======
+ * Authors : 
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  * Drasko DRASKOVIC <drasko.draskovic@gmail.com>
  * Uros PETREVSKI <uros@nodesign.net>
  */

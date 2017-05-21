@@ -6,7 +6,11 @@
  # - gettext_datadir     directory where the data files are stored.
 -prefix="@prefix@"
 +if [ -n "$STAGING_DIR" ]; then
+<<<<<<< HEAD
 +	prefix="$STAGING_DIR/../host"
+=======
++	prefix="$STAGING_DIR/host"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 +else
 +	prefix="@prefix@"
 +fi
@@ -21,7 +25,11 @@
  # - gettext_datadir     directory where the data files are stored.
 -prefix="@prefix@"
 +if [ -n "$STAGING_DIR" ]; then
+<<<<<<< HEAD
 +	prefix="$STAGING_DIR/../host"
+=======
++	prefix="$STAGING_DIR/host"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 +else
 +	prefix="@prefix@"
 +fi

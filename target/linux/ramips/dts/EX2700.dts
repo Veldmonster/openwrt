@@ -10,7 +10,11 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD
 /include/ "mt7620a.dtsi"
+=======
+#include "mt7620a.dtsi"
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 / {
 	compatible = "ralink,mt7620a-soc";
@@ -20,6 +24,7 @@
 		bootargs = "console=ttyS0,57600";
 	};
 
+<<<<<<< HEAD
 	palmbus@10000000 {
 
 		gpio0: gpio@600 {
@@ -87,6 +92,8 @@
 		};
 	};
 
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	gpio-leds {
 		compatible = "gpio-leds";
 
@@ -146,3 +153,70 @@
 		};
 	};
 };
+<<<<<<< HEAD
+=======
+
+&gpio0 {
+	status = "okay";
+};
+
+&gpio1 {
+	status = "okay";
+};
+
+&spi0 {
+	status = "okay";
+
+	m25p80@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		linux,modalias = "m25p80", "mx25l3205d";
+		spi-max-frequency = <10000000>;
+
+		partition@0 {
+			label = "u-boot";
+			reg = <0x0 0x30000>;
+			read-only;
+		};
+
+		partition@30000 {
+			label = "u-boot-env";
+			reg = <0x30000 0x10000>;
+			read-only;
+		};
+
+		partition@40000 {
+			label = "firmware";
+			reg = <0x40000 0x3b0000>;
+		};
+
+		art: partition@3f0000 {
+			label = "art";
+			reg = <0x3f0000 0x10000>;
+			read-only;
+		};
+	};
+};
+
+&ethernet {
+	mtd-mac-address = <&art 0x0>;
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&art 0x1000>;
+};
+
+&pinctrl {
+	state_default: pinctrl0 {
+		default {
+			//  spi refclk: pins 37, 38, 39
+			//       uartf: pins 8, 9, 10, 11, 12, 13, 14
+			//         i2c: pins 1, 2
+			ralink,group = "i2c", "uartf", "spi refclk";
+			ralink,function = "gpio";
+		};
+	};
+};
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

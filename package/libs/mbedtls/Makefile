@@ -8,13 +8,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mbedtls
+<<<<<<< HEAD
 PKG_VERSION:=2.2.1
 PKG_RELEASE:=1
+=======
+PKG_VERSION:=2.3.0
+PKG_RELEASE:=2
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_USE_MIPS16:=0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-gpl.tgz
 PKG_SOURCE_URL:=https://tls.mbed.org/download/
+<<<<<<< HEAD
 PKG_MD5SUM:=b6909d94600fc5f644e9bca52e96fb27
+=======
+PKG_MD5SUM:=21237014f779bde70b2d71399cc1ea53365eb7f10cdd74a13ee6329a1910cb49
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPL-2.0+
@@ -59,14 +68,23 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/mbedtls $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
+<<<<<<< HEAD
 	$(LN) lib$(PKG_NAME).so.9 $(1)/usr/lib/lib$(PKG_NAME).so
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 endef
 
 define Package/libmbedtls/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
+<<<<<<< HEAD
 	$(LN) lib$(PKG_NAME).so.09 $(1)/usr/lib/lib$(PKG_NAME).so
 endef
 
 $(eval $(call BuildPackage,libmbedtls))
 
+=======
+endef
+
+$(eval $(call BuildPackage,libmbedtls))
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600

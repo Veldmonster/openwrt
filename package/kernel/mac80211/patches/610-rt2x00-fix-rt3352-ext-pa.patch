@@ -200,7 +200,11 @@
   * EEPROM frequency
 --- a/drivers/net/wireless/ralink/rt2x00/rt2x00.h
 +++ b/drivers/net/wireless/ralink/rt2x00/rt2x00.h
+<<<<<<< HEAD
 @@ -717,6 +717,8 @@ enum rt2x00_capability_flags {
+=======
+@@ -719,6 +719,8 @@ enum rt2x00_capability_flags {
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	CAPABILITY_DOUBLE_ANTENNA,
  	CAPABILITY_BT_COEXIST,
  	CAPABILITY_VCO_RECALIBRATION,

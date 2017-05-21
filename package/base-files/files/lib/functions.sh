@@ -173,6 +173,7 @@ default_prerm() {
 	done
 }
 
+<<<<<<< HEAD
 default_postinst() {
 	local pkgname rusers ret
 	ret=0
@@ -213,9 +214,44 @@ default_postinst() {
 
 				group_add_user $ugname $user
 			done
-		done
-	}
+=======
+add_group_and_user() {
+	local pkgname="$1"
+	local rusers="$(sed -ne 's/^Require-User: *//p' $root/usr/lib/opkg/info/${pkgname}.control 2>/dev/null)"
 
+	if [ -n "$rusers" ]; then
+		local tuple oIFS="$IFS"
+		for tuple in $rusers; do
+			local uid gid uname gname
+
+			IFS=":"
+			set -- $tuple; uname="$1"; gname="$2"
+			IFS="="
+			set -- $uname; uname="$1"; uid="$2"
+			set -- $gname; gname="$1"; gid="$2"
+			IFS="$oIFS"
+
+			if [ -n "$gname" ] && [ -n "$gid" ]; then
+				group_exists "$gname" || group_add "$gname" "$gid"
+			elif [ -n "$gname" ]; then
+				group_add_next "$gname"; gid=$?
+			fi
+
+			if [ -n "$uname" ]; then
+				user_exists "$uname" || user_add "$uname" "$uid" "$gid"
+			fi
+
+			if [ -n "$uname" ] && [ -n "$gname" ]; then
+				group_add_user "$gname" "$uname"
+			fi
+
+			unset uid gid uname gname
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
+		done
+	fi
+}
+
+<<<<<<< HEAD
 	if [ -f ${IPKG_INSTROOT}/usr/lib/opkg/info/${pkgname}.postinst-pkg ]; then
 		( . ${IPKG_INSTROOT}/usr/lib/opkg/info/${pkgname}.postinst-pkg )
 		ret=$?
@@ -229,6 +265,56 @@ default_postinst() {
 			$i start
 		}
 	done
+=======
+default_postinst() {
+	local root="${IPKG_INSTROOT}"
+	local pkgname="$(basename ${1%.*})"
+	local ret=0
+
+	add_group_and_user "${pkgname}"
+
+	if [ -f "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" ]; then
+		( . "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" )
+		ret=$?
+	fi
+
+	if [ -z "$root" ] && grep -q -s "^/etc/uci-defaults/" "$root/usr/lib/opkg/info/${pkgname}.list"; then
+		. /lib/functions/system.sh
+		[ -d /tmp/.uci ] || mkdir -p /tmp/.uci
+		cd /etc/uci-defaults
+		for i in $(grep -s "^/etc/uci-defaults/" "$root/usr/lib/opkg/info/${pkgname}.list"); do
+			( . "./$(basename $i)" ) && rm -f "$i"
+		done
+		uci commit
+		cd $OLDPWD
+	fi
+
+	if [ -z "$root" ] && grep -q -s "^/etc/uci-defaults/" "/usr/lib/opkg/info/${pkgname}.list"; then
+		. /lib/functions/system.sh
+		[ -d /tmp/.uci ] || mkdir -p /tmp/.uci
+		cd /etc/uci-defaults
+		for i in $(grep -s "^/etc/uci-defaults/" "/usr/lib/opkg/info/${pkgname}.list"); do
+			( . "./$(basename $i)" ) && rm -f "$i"
+		done
+		uci commit
+		cd $OLDPWD
+	fi
+
+	[ -n "$root" ] || rm -f /tmp/luci-indexcache 2>/dev/null
+
+	if [ "$PKG_UPGRADE" != "1" ]; then
+		local shell="$(which bash)"
+		for i in $(grep -s "^/etc/init.d/" "$root/usr/lib/opkg/info/${pkgname}.list"); do
+			if [ -n "$root" ]; then
+				${shell:-/bin/sh} "$root/etc/rc.common" "$root$i" enable
+			else
+				"$i" enable
+				"$i" start
+			fi
+		done
+	fi
+
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	return $ret
 }
 

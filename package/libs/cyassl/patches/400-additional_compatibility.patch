@@ -1,6 +1,10 @@
 --- a/cyassl/openssl/ssl.h
 +++ b/cyassl/openssl/ssl.h
+<<<<<<< HEAD
 @@ -27,6 +27,9 @@
+=======
+@@ -28,6 +28,9 @@
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  #define CYASSL_OPENSSL_H_
  
  #include <cyassl/ssl.h>

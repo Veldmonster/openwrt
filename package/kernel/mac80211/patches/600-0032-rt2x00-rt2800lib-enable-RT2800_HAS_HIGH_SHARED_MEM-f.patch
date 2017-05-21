@@ -11,7 +11,11 @@ Signed-off-by: Gabor Juhos <juhosg@openwrt.org>
 
 --- a/drivers/net/wireless/ralink/rt2x00/rt2800lib.c
 +++ b/drivers/net/wireless/ralink/rt2x00/rt2800lib.c
+<<<<<<< HEAD
 @@ -8416,7 +8416,8 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+=======
+@@ -8420,7 +8420,8 @@ int rt2800_probe_hw(struct rt2x00_dev *r
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	if (retval)
  		return retval;
  

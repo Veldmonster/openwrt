@@ -8,7 +8,11 @@
 define Profile/WIZFI630A
 	NAME:=WIZnet WizFi630A
 	PACKAGES:=\
+<<<<<<< HEAD
 		kmod-usb2
+=======
+		kmod-usb2 
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 endef
 
 define Profile/WIZFI630A/Description

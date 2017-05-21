@@ -7,11 +7,15 @@
 
 define Profile/Solidrun-Clearfog-A1
   NAME:=SolidRun ClearFog A1 board
+<<<<<<< HEAD
   PACKAGES:= \
 	kmod-usb3 kmod-usb2 kmod-usb-storage \
 	kmod-of-i2c kmod-i2c-core kmod-i2c-mv64xxx \
 	kmod-ata-core kmod-ata-marvell-sata \
 	kmod-thermal-armada kmod-rtc-marvell
+=======
+  PACKAGES:=
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 endef
 
 define Profile/Solidrun-Clearfog-A1/Description

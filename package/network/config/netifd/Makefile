@@ -1,15 +1,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=netifd
+<<<<<<< HEAD
 PKG_VERSION:=2015-12-16
+=======
+PKG_VERSION:=2016-12-09
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=http://git.openwrt.org/project/netifd.git
+PKG_SOURCE_URL=$(OPENWRT_GIT)/project/netifd.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+<<<<<<< HEAD
 PKG_SOURCE_VERSION:=245527193e90906451be35c2b8e972b8712ea6ab
+=======
+PKG_SOURCE_VERSION:=edc15caac6c6d3b2d8ea17f98ecbaba81ba573dc
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
-PKG_MAINTAINER:=Felix Fietkau <nbd@openwrt.org>
+PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 # PKG_MIRROR_MD5SUM:=
 # CMAKE_INSTALL:=1
 

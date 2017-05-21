@@ -4,7 +4,11 @@ src-git routing https://github.com/openwrt-routing/packages.git
 src-git telephony https://github.com/openwrt/telephony.git
 src-git management https://github.com/openwrt-management/packages.git
 src-git targets https://github.com/openwrt/targets.git
+<<<<<<< HEAD
 src-git oldpackages http://git.openwrt.org/packages.git
 src-git luci2 git://git.openwrt.org/project/luci2/ui.git
+=======
+#src-git oldpackages http://git.openwrt.org/packages.git
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 #src-link custom /usr/src/openwrt/custom-feed
 

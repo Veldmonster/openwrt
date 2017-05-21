@@ -11,6 +11,11 @@ obj.bcm53xx = $(obj.brcm) $(obj.seama)
 obj.brcm63xx = imagetag.o
 obj.ramips = $(obj.seama)
 obj.mvebu = linksys_bootcount.o
+<<<<<<< HEAD
+=======
+obj.kirkwood = linksys_bootcount.o
+obj.ipq806x = linksys_bootcount.o
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 ifdef FIS_SUPPORT
   obj += fis.o

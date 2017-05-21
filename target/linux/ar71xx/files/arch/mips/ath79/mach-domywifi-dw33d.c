@@ -94,14 +94,24 @@ static struct gpio_keys_button dw33d_gpio_keys[] __initdata = {
 	}
 };
 
+<<<<<<< HEAD
 /* GMAC0 of the QCA8337 switch is connected to the QCA9558 SoC via SGMII */
 static struct ar8327_pad_cfg dw33d_qca8337_pad0_cfg = {
+=======
+/* GMAC6 of the QCA8337 switch is connected to the QCA9558 SoC via SGMII */
+static struct ar8327_pad_cfg dw33d_qca8337_pad6_cfg = {
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	.mode = AR8327_PAD_MAC_SGMII,
 	.sgmii_delay_en = true,
 };
 
+<<<<<<< HEAD
 /* GMAC6 of the QCA8337 switch is connected to the QCA9558 SoC via RGMII */
 static struct ar8327_pad_cfg dw33d_qca8337_pad6_cfg = {
+=======
+/* GMAC0 of the QCA8337 switch is connected to the QCA9558 SoC via RGMII */
+static struct ar8327_pad_cfg dw33d_qca8337_pad0_cfg = {
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 	.mode = AR8327_PAD_MAC_RGMII,
 	.txclk_delay_en = true,
 	.rxclk_delay_en = true,

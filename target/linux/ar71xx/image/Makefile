@@ -4,16 +4,27 @@
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
+
+JFFS2_BLOCKSIZE = 64k 128k 256k
+
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
 IMAGE_PROFILE:=$(if $(PROFILE),$(PROFILE),Default)
 
-JFFS2_BLOCKSIZE = 64k 128k 256k
-
 KERNEL_LOADADDR = 0x80060000
 
-DEVICE_VARS += NETGEAR_KERNEL_MAGIC NETGEAR_BOARD NETGEAR_ID CMDLINE CONSOLE IMAGE_SIZE BOARDNAME LOADER_FLASH_OFFS
+DEVICE_VARS += NETGEAR_KERNEL_MAGIC NETGEAR_BOARD_ID NETGEAR_HW_ID CMDLINE CONSOLE IMAGE_SIZE BOARDNAME LOADER_FLASH_OFFS LOADER_TYPE
+
+ifeq ($(SUBTARGET),generic)
+include ./tp-link.mk
+include ./ubnt.mk
+include ./generic.mk
+endif
+ifeq ($(SUBTARGET),nand)
+include ./nand.mk
+endif
+include ./legacy.mk
 
 define Build/netgear-squashfs
 	rm -rf $@.fs $@.squashfs
@@ -21,7 +32,9 @@ define Build/netgear-squashfs
 	cp $@ $@.fs/image/uImage
 	$(STAGING_DIR_HOST)/bin/mksquashfs-lzma \
 		$@.fs $@.squashfs \
-		-noappend -root-owned -be -b 65536
+		-noappend -root-owned -be -b 65536 \
+		$(if $(SOURCE_DATE_EPOCH),-fixed-time $(SOURCE_DATE_EPOCH))
+
 	dd if=/dev/zero bs=1k count=1 >> $@.squashfs
 	mkimage \
 		-A mips -O linux -T filesystem -C none \
@@ -36,60 +49,28 @@ define Build/netgear-uImage
 	$(call Build/uImage,$(1) -M $(NETGEAR_KERNEL_MAGIC))
 endef
 
-define Build/netgear-image
-	$(STAGING_DIR_HOST)/bin/mkdniimg \
-		-B $(NETGEAR_BOARD) -v OpenWrt.$(REVISION) \
-		$(if $(NETGEAR_ID),-H $(NETGEAR_ID)) \
-		-r "$(1)" \
-		-i $@ -o $@.new
-	mv $@.new $@
-endef
-
-# combine kernel and rootfs into one image
-# -a align the rootfs start on an <align> bytes boundary
-# -j add jffs2 end-of-filesystem markers
-# -s strip padding from end of the image
-# -X reserve <size> bytes in the firmware image (hexval prefixed with 0x)
-define Build/mktplinkfw
-	-$(STAGING_DIR_HOST)/bin/mktplinkfw \
-		-H $(TPLINK_HWID) -W $(TPLINK_HWREV) -F $(TPLINK_FLASHLAYOUT) -N OpenWrt -V $(REVISION) \
-		-k $(word 1,$^) \
-		-r $@ \
-		-o $@.new \
-		-j -X 0x40000 \
-		-a $(call rootfs_align,$(FILESYSTEM)) \
-		$(if $(findstring sysupgrade,$1),-s) && mv $@.new $@ || rm -f $@
-endef
-
-# -c combined image
-define Build/mktplinkfw-initramfs
-	$(STAGING_DIR_HOST)/bin/mktplinkfw \
-		-H $(TPLINK_HWID) -W $(TPLINK_HWREV) -F $(TPLINK_FLASHLAYOUT) -N OpenWrt -V $(REVISION) \
-		-k $@ \
-		-o $@.new \
-		-s -S \
-		-c
-	@mv $@.new $@
-endef
-
 define Build/loader-common
 	rm -rf $@.src
 	$(MAKE) -C lzma-loader \
 		PKG_BUILD_DIR="$@.src" \
 		TARGET_DIR="$(dir $@)" LOADER_NAME="$(notdir $@)" \
-		KERNEL_CMDLINE="$(CMDLINE)" BOARD="$(BOARDNAME)" \
+		BOARD="$(BOARDNAME)" \
 		LZMA_TEXT_START=0x80a00000 LOADADDR=0x80060000 \
-		$(1) compile loader.gz
-	mv "$@.gz" "$@"
+		$(1) compile loader.$(LOADER_TYPE)
+	mv "$@.$(LOADER_TYPE)" "$@"
 	rm -rf $@.src
 endef
 
 define Build/loader-okli-compile
-	$(call Build/loader-common,FLASH_OFFS=$(LOADER_FLASH_OFFS) FLASH_MAX=0)
+	$(call Build/loader-common,FLASH_OFFS=$(LOADER_FLASH_OFFS) FLASH_MAX=0 KERNEL_CMDLINE="$(CMDLINE)")
 endef
 
 define Build/loader-kernel
 	$(call Build/loader-common,LOADER_DATA="$@")
+endef
+
+define Build/loader-kernel-cmdline
+	$(call Build/loader-common,LOADER_DATA="$@" KERNEL_CMDLINE="$(CMDLINE)")
 endef
 
 define Build/loader-okli
@@ -101,8 +82,6 @@ endef
 define Build/copy-file
 	cat "$(1)" > "$@"
 endef
-
-DEVICE_VARS += TPLINK_HWID TPLINK_HWREV TPLINK_FLASHLAYOUT
 
 define Device/Default
   BOARDNAME :=
@@ -120,6 +99,7 @@ define Device/Default
   IMAGE/sysupgrade.bin = append-kernel $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | check-size $$$$(IMAGE_SIZE)
 endef
 
+<<<<<<< HEAD
 define Device/bsb
   BOARDNAME = BSB
   IMAGE_SIZE = 16000k
@@ -2298,4 +2278,6 @@ define Image/Build
 	$(call Image/Build/Profile/$(IMAGE_PROFILE),$(1))
 endef
 
+=======
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 $(eval $(call BuildImage))

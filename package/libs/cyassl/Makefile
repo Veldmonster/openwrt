@@ -8,12 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wolfssl
+<<<<<<< HEAD
 PKG_VERSION:=3.8.0
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
 PKG_SOURCE_URL:=https://www.wolfssl.com/
 PKG_MD5SUM:=a73d90c5439adea97a5002a73b46ddeb
+=======
+PKG_VERSION:=3.9.6
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
+PKG_SOURCE_URL:=https://www.wolfssl.com/
+PKG_MD5SUM:=df435eacae4f2f1a92a241e80a2106d9
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 
 PKG_FIXUP:=libtool
 PKG_INSTALL:=1
@@ -38,10 +47,10 @@ endef
 TARGET_CFLAGS += $(FPIC)
 
 CONFIGURE_ARGS += \
-	--without-zlib \
 	--enable-singlethreaded \
 	--enable-opensslextra \
 	--enable-sni \
+	--enable-stunnel \
 	--enable-ecc \
 	--enable-sslv3 \
 	--disable-examples

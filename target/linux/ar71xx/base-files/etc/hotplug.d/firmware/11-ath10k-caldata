@@ -81,7 +81,12 @@ case "$FIRMWARE" in
 		ath10kcal_extract "ART" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) +16)
 		;;
+<<<<<<< HEAD
 	unifiac)
+=======
+	unifiac-lite | \
+	unifiac-pro)
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 		ath10kcal_extract "EEPROM" 20480 2116
 		;;
 	esac

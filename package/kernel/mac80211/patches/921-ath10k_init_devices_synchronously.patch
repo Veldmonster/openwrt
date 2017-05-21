@@ -14,7 +14,11 @@ Signed-off-by: Sven Eckelmann <sven@open-mesh.com>
 
 --- a/drivers/net/wireless/ath/ath10k/core.c
 +++ b/drivers/net/wireless/ath/ath10k/core.c
+<<<<<<< HEAD
 @@ -1914,6 +1914,16 @@ int ath10k_core_register(struct ath10k *
+=======
+@@ -2009,6 +2009,16 @@ int ath10k_core_register(struct ath10k *
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	ar->chip_id = chip_id;
  	queue_work(ar->workqueue, &ar->register_work);
  

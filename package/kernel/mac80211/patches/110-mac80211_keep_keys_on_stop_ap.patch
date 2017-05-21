@@ -2,7 +2,11 @@ Used for AP+STA support in OpenWrt - preserve AP mode keys across STA reconnects
 
 --- a/net/mac80211/cfg.c
 +++ b/net/mac80211/cfg.c
+<<<<<<< HEAD
 @@ -846,7 +846,6 @@ static int ieee80211_stop_ap(struct wiph
+=======
+@@ -850,7 +850,6 @@ static int ieee80211_stop_ap(struct wiph
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
  	sdata->u.ap.driver_smps_mode = IEEE80211_SMPS_OFF;
  
  	__sta_info_flush(sdata, true);

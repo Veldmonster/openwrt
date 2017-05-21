@@ -15,7 +15,11 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/openwrt/odhcp6c.git
 PKG_SOURCE_PROTO:=git
+<<<<<<< HEAD
 PKG_SOURCE_VERSION:=dc186d6d2b0dd4ad23ca5fc69c00e81f796ff6d9
+=======
+PKG_SOURCE_VERSION:=7533a6243dc3ac5a747cf6ccbc4d0539dafd3e07
+>>>>>>> 871372c42a3fc9c4b33f5c6011742d610a2e5600
 PKG_MAINTAINER:=Steven Barth <steven@midlink.org>
 PKG_LICENSE:=GPL-2.0
 
@@ -30,7 +34,7 @@ define Package/odhcp6c
   SECTION:=net
   CATEGORY:=Network
   TITLE:=Embedded DHCPv6-client for OpenWrt
-  DEPENDS:=+kmod-ipv6
+  DEPENDS:=@IPV6
 endef
 
 define Package/odhcp6c/config
